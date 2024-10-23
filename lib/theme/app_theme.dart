@@ -11,21 +11,23 @@ class AppTheme {
         useMaterial3: true,
         brightness: brightness,
         // extensions: [buildExtraColors()],
+        elevatedButtonTheme: _buildElevatedButtonTheme(brightness),
         inputDecorationTheme: _buildInputDecorationTheme(brightness),
         colorScheme: _buildColorScheme(brightness),
         filledButtonTheme: _buildFilledButtonTheme(brightness),
         outlinedButtonTheme: _buildOutlinedButtonTheme(brightness),
         textButtonTheme: _buildTextButtonTheme(brightness),
+        iconTheme: _buildIconThemeTheme(brightness),
         textTheme: const TextTheme().copyWith(
           bodyLarge: TextStyle(
               color:
-                  Brightness.dark == brightness ? Colors.white : ColorsTheme.textColor),
+                  Brightness.dark != brightness ? Colors.white : ColorsTheme.textColor),
           bodyMedium: TextStyle(
               color:
-                  Brightness.dark == brightness ? Colors.white : ColorsTheme.textColor),
+                  Brightness.dark != brightness ? Colors.white : ColorsTheme.textColor),
           displayLarge: TextStyle(
               color:
-                  Brightness.dark == brightness ? Colors.white : ColorsTheme.textColor),
+                  Brightness.dark != brightness ? Colors.white : ColorsTheme.textColor),
         ),
         timePickerTheme: _buildtimePickerTheme(brightness),
         datePickerTheme: _buildDatePickerTheme());
@@ -95,6 +97,20 @@ class AppTheme {
   //     error: Color.fromARGB(255, 255, 0, 0),
   //   );
   // }
+
+  ElevatedButtonThemeData _buildElevatedButtonTheme(brightness) {
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(0, 55),
+        maximumSize: const Size(double.infinity, double.infinity),
+        padding: padding,
+        backgroundColor: ColorsTheme.buttonColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderSize.extraLargeRadius,
+        ),
+      ),
+    );
+  }
 
   ColorScheme _buildColorScheme(Brightness brightness) {
     final colorScheme = ColorScheme.fromSeed(
@@ -187,6 +203,9 @@ class AppTheme {
         dayForegroundColor: WidgetStatePropertyAll(Color(0xFFD9D9D9)),
         backgroundColor: Color(0xFF333333),
       );
+  IconThemeData _buildIconThemeTheme(brightness) {
+    return IconThemeData(color: Colors.black);
+  }
 }
 
 final colorSchemeNotifier = ValueNotifier<ColorScheme>(ColorScheme.fromSeed(

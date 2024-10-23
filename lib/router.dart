@@ -1,13 +1,25 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:about_me/entry_point.dart';
 import 'package:about_me/pages/projects_page.dart';
 import 'package:about_me/pages/services_page.dart';
-import 'package:about_me/pages/about_me_page.dart';
+import 'package:about_me/pages/about_me_page/about_me_page.dart';
 
 import 'pages/contact_me_page.dart';
 
 final appRouter = GoRouter(
-  initialLocation: Routes.contactMe,
+  initialLocation: Routes.aboutMe,
+  errorBuilder: (context, state) => Scaffold(
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Error: ${state.error}'),
+          Text(state.error!.message),
+        ],
+      ),
+    ),
+  ),
   routes: [
     // Defining the shell route for the layout
     ShellRoute(
